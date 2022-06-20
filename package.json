@@ -1,0 +1,94 @@
+{
+  "name": "auto-change-file-name",
+  "version": "0.1.0",
+  "description": "",
+  "author": "CaoMeiYouRen",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "release": "semantic-release",
+    "lint": "cross-env NODE_ENV=production eslint src --fix --ext .ts,.js",
+    "prebuild": "rimraf dist",
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "postbuild": "npm run build:type",
+    "build:type": "api-extractor run",
+    "postbuild:type": "rimraf \"dist/**/!(*.js?(.map)|index.d.ts)\"",
+    "analyzer": "cross-env NODE_ENV=production ANALYZER=true rollup -c",
+    "dev": "cross-env NODE_ENV=development ts-node-dev src/index.ts",
+    "dev:rollup": "cross-env NODE_ENV=development rollup -c -w",
+    "rm": "rimraf node_modules",
+    "start": "node ./dist/index",
+    "commit": "cz",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "@microsoft/api-extractor": "^7.25.2",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@types/debug": "^4.1.7",
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "commitizen": "^4.2.3",
+    "conventional-changelog-cli": "^2.2.2",
+    "conventional-changelog-cmyr-config": "^2.0.4",
+    "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-conventional-changelog-cmyr": "^1.0.0",
+    "debug": "^4.3.4",
+    "eslint": "^8.17.0",
+    "eslint-config-cmyr": "^1.1.20",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.2",
+    "lodash": "^4.17.21",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.75.6",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "semantic-release": "^19.0.3",
+    "ts-node": "^10.8.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.3",
+    "validate-commit-msg": "^2.14.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-cmyr"
+    }
+  },
+  "changelog": {
+    "language": "zh"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "homepage": "https://github.com/CaoMeiYouRen/auto-change-file-name#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CaoMeiYouRen/auto-change-file-name.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CaoMeiYouRen/auto-change-file-name/issues"
+  },
+  "dependencies": {}
+}
