@@ -6,8 +6,11 @@
   "private": true,
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "ac": "dist/index.js",
+    "auto-change": "dist/index.js"
+  },
   "files": [
     "dist"
   ],
@@ -19,7 +22,6 @@
     "lint": "cross-env NODE_ENV=production eslint src --fix --ext .ts,.js",
     "prebuild": "rimraf dist",
     "build": "cross-env NODE_ENV=production rollup -c",
-    "postbuild": "npm run build:type",
     "build:type": "api-extractor run",
     "postbuild:type": "rimraf \"dist/**/!(*.js?(.map)|index.d.ts)\"",
     "analyzer": "cross-env NODE_ENV=production ANALYZER=true rollup -c",
@@ -42,7 +44,10 @@
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "@types/debug": "^4.1.7",
+    "@types/fs-extra": "^9.0.13",
+    "@types/glob": "^7.2.0",
     "@types/lodash": "^4.14.182",
+    "@types/minimist": "^1.2.2",
     "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
     "@typescript-eslint/parser": "^5.28.0",
@@ -76,12 +81,6 @@
   "changelog": {
     "language": "zh"
   },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "npm run lint",
-      "git add"
-    ]
-  },
   "homepage": "https://github.com/CaoMeiYouRen/auto-change-file-name#readme",
   "repository": {
     "type": "git",
@@ -90,5 +89,12 @@
   "bugs": {
     "url": "https://github.com/CaoMeiYouRen/auto-change-file-name/issues"
   },
-  "dependencies": {}
+  "dependencies": {
+    "commander": "^9.3.0",
+    "dayjs": "^1.11.3",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.3",
+    "minimist": "^1.2.6",
+    "tslib": "^2.4.0"
+  }
 }

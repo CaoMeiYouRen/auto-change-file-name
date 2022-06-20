@@ -66,21 +66,6 @@ function getPlugins({ isBrowser = false, isMin = false, isDeclaration = false })
 
 export default defineConfig([
     {
-        input: 'src/index.ts', // 生成类型文件
-        external,
-        output: {
-            dir: 'dist',
-            format: 'esm',
-            name: outputName,
-            sourcemap: true,
-        },
-        plugins: getPlugins({
-            isBrowser: false,
-            isDeclaration: true,
-            isMin: false,
-        }),
-    },
-    {
         input: 'src/index.ts',
         external,
         output: {
@@ -88,6 +73,7 @@ export default defineConfig([
             format: 'cjs',
             name: outputName,
             sourcemap: true,
+            banner: '#!/usr/bin/env node',
         },
         plugins: getPlugins({
             isBrowser: false,
@@ -95,47 +81,4 @@ export default defineConfig([
             isMin: false,
         }),
     },
-    {
-        input: 'src/index.ts',
-        external,
-        output: {
-            file: 'dist/index.esm.js', // 生成 esm
-            format: 'esm',
-            name: outputName,
-            sourcemap: true,
-        },
-        plugins: getPlugins({
-            isBrowser: false,
-            isDeclaration: false,
-            isMin: false,
-        }),
-    },
-    // {
-    //     input: 'src/index.ts',
-    //     output: {
-    //         file: 'dist/index.browser.js', // 生成 browser umd
-    //         format: 'umd',
-    //         name: outputName,
-    //         sourcemap: true,
-    //     },
-    //     plugins: getPlugins({
-    //         isBrowser: true,
-    //         isDeclaration: false,
-    //         isMin: true,
-    //     }),
-    // },
-    // {
-    //     input: 'src/index.ts',
-    //     output: {
-    //         file: 'dist/index.browser.esm.js', // 生成 browser esm
-    //         format: 'esm',
-    //         name: outputName,
-    //         sourcemap: true,
-    //     },
-    //     plugins: getPlugins({
-    //         isBrowser: true,
-    //         isDeclaration: false,
-    //         isMin: true,
-    //     }),
-    // },
 ])
